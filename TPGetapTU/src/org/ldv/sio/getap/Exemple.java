@@ -26,6 +26,22 @@ public class Exemple {
 		dvctap.setAccPers(SDL);
 		dvctap.setEleve(NBR);
 		dvctap.setEtat(0);
+		System.out.println(dvctap);
+		
+		dvctap.setEtat(4);
+		System.out.println(dvctap);
+		dvctap.setEtat(32);
+		System.out.println(dvctap);
+		dvctap.setEtat(4);
+		System.out.println(dvctap);
+		dvctap.setEtat(2048);
+		System.out.println(dvctap);
+		dvctap.setEtat(2);
+		System.out.println(dvctap);
+		dvctap.setEtat(32);
+		System.out.println(dvctap);
 	}
+	
+	
 
 }
