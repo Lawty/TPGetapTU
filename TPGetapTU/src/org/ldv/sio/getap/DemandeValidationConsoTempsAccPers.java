@@ -178,4 +178,10 @@ public class DemandeValidationConsoTempsAccPers {
 				+ ", eleve=" + eleve + ", etat=" + etat + "]";
 	}
 
+	public boolean isEtatInitial() {
+		
+		return this.etat==0;
+		
+	}
+
 }
