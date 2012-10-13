@@ -1,6 +1,7 @@
 package org.ldv.sio.getap;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Demande de validation d'un temps d'accompagnement personnalisé
@@ -12,6 +13,18 @@ public class DemandeValidationConsoTempsAccPers {
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
+	private static final int DEMANDE_INIT = 0;
+	private static final int ELEVE_ACCEPTEE = 1;
+	private static final int ELEVE_REFUSE = 2;
+	private static final int ELEVE_MODIFIEE = 4;
+	private static final int ELEVE_ANNULEE = 8;
+	private static final int PROF_VALIDEE = 32;
+	private static final int PROF_REFUSEE = 64;
+
+	/**
+	 * mise en mémoire des actions dans un tableau
+	 */
+	ArrayList<Integer> liste = new ArrayList<Integer>();
 
 	/**
 	 * Identifiant de la DCTAP
@@ -58,19 +71,20 @@ public class DemandeValidationConsoTempsAccPers {
 	/**
 	 * Constructeur permettant de créer une demande complète.
 	 * 
-	 * @param id peut être null (moment de la creation)
-	 *            
+	 * @param id
+	 *            peut être null (moment de la creation)
+	 * 
 	 * @param anneeScolaire
 	 * @param date
 	 * @param minutes
 	 * @param prof
 	 * @param accPers
-	 * @param eleve 
+	 * @param eleve
 	 * @param etat
 	 */
-	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
-			Integer minutes, User prof, AccPersonalise accPers, User eleve,
-			int etat) {
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
+			Date date, Integer minutes, User prof, AccPersonalise accPers,
+			User eleve, int etat) {
 		super();
 		this.id = id;
 		this.anneeScolaire = anneeScolaire;
@@ -142,6 +156,12 @@ public class DemandeValidationConsoTempsAccPers {
 		return etat;
 	}
 
+	public void setEtat(int i) {
+
+		this.etat = i;
+
+	}
+
 	/**
 	 * Permet de modifier l'état de la demande
 	 * 
@@ -165,11 +185,15 @@ public class DemandeValidationConsoTempsAccPers {
 	 *            modifiée par le professeur</li>
 	 *            </ul>
 	 */
-	public void setEtat(int etat) {
-		this.etat = etat;
+
+	// /** Insère la valeur dans une liste de int */
+
+	public void sauvegarde(int etat, int index) {
+
+		this.liste.add(index, etat);
+
 	}
 
-	
 	@Override
 	public String toString() {
 		return "DemandeConsoTempsAccPers [id=" + id + ", anneeScolaire="
@@ -179,9 +203,40 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public boolean isEtatInitial() {
+
+		return this.etat == 0;
+
+	}
+	
+	/**
+	 *  Test des diférents chemins
+	 */
+
+	public boolean cheminsPossible(ArrayList<Integer> a) {
+
+		if (a.get(0) == ELEVE_MODIFIEE 
+				|| a.get(0) == ELEVE_ANNULEE
+				|| a.get(0) == PROF_VALIDEE 
+				|| a.get(0) == PROF_REFUSEE) {
+
+			if (a.get(1) == null 
+					|| a.get(1) == ELEVE_ACCEPTEE 
+					|| a.get(1) == ELEVE_REFUSE
+					|| a.get(1) == ELEVE_ANNULEE 
+					|| a.get(1) == PROF_VALIDEE 
+					|| a.get(1) == PROF_REFUSEE
+					|| a.get(1) == DATE_MODIFIEE 
+					|| a.get(1) == DUREE_MODIFIEE 
+					|| a.get(1) == AP_MODIFIEE) {
+
+				if (a.get(2) == null  || a.get(2) == ELEVE_ACCEPTEE || a.get(2) == ELEVE_REFUSE) {
+
+					return true;
+				}
+			}
+		}
 		
-		return this.etat==0;
+		return false;
 		
 	}
-
 }
