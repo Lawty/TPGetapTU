@@ -11,6 +11,10 @@ import org.ldv.sio.getap.DemandeValidationConsoTempsAccPers;
 import org.ldv.sio.getap.Discipline;
 import org.ldv.sio.getap.User;
 
+
+ 
+ 
+
 public class TestDemandeValidationConsoTempsAccPers {
 
 	Integer itg = new Integer(1);
@@ -26,7 +30,9 @@ public class TestDemandeValidationConsoTempsAccPers {
 	public void setUp() throws Exception {
 
 	}
-
+/*
+ * Test la présence d 'une requete
+ */
 	@Test
 	public void testDemandeValidationConsoTempsAccPersLongStringDateIntegerUserAccPersonaliseUserInt() {
 
@@ -52,6 +58,11 @@ public class TestDemandeValidationConsoTempsAccPers {
 
 	}
 
+	
+	
+	/*
+	 * Vérifie l'état initial d'une requete
+	 */
 	@Test
 	public void testEtatInitial() {
 
