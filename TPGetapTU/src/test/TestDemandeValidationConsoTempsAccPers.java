@@ -70,6 +70,8 @@ public class TestDemandeValidationConsoTempsAccPers {
 			dvctap.setEleve(NBR);
 			dvctap.setEtat(0);
 
+			System.out.println(dvctap.getEtat());
+
 			assertTrue("Etat initial", dvctap.isEtatInitial());
 		} catch (DVCTAPException e) {
 
@@ -77,7 +79,7 @@ public class TestDemandeValidationConsoTempsAccPers {
 	}
 
 	@Test
-	public void testChaineEtat() {
+	public void testDemandeAnnuleeEleve() {
 
 		try {
 
@@ -92,9 +94,451 @@ public class TestDemandeValidationConsoTempsAccPers {
 			dvctap.setProf(OKP);
 			dvctap.setAccPers(SDL);
 			dvctap.setEleve(NBR);
-			dvctap.setEtat(0);
 
-			// assertTrue("Etat initial", dvctap.isEtatInitial());
+			dvctap.sauvegarde(8, 0);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeRefuseeProf() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(64, 0);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeValideeProf() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(32, 0);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeModifieeAnnuleeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(8, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeDateModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(1024, 0);
+			dvctap.sauvegarde(1, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeDateModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(1024, 0);
+			dvctap.sauvegarde(2, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeDureeModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(2048, 0);
+			dvctap.sauvegarde(1, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeDureeModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(2048, 0);
+			dvctap.sauvegarde(2, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeAPModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4096, 0);
+			dvctap.sauvegarde(1, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeAPModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4096, 0);
+			dvctap.sauvegarde(2, 1);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeModifieeDateModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(1024, 1);
+			dvctap.sauvegarde(1, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeModifieeDateModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(1024, 1);
+			dvctap.sauvegarde(2, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+
+	@Test
+	public void testDemandeModifieeDureeModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(2048, 1);
+			dvctap.sauvegarde(1, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+	
+	@Test
+	public void testDemandeModifieeDureeModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(2048, 1);
+			dvctap.sauvegarde(2, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+	
+	@Test
+	public void testDemandeModifieeAPModifieeAccepteeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(4096, 1);
+			dvctap.sauvegarde(1, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
+		} catch (DVCTAPException e) {
+
+		}
+	}
+	@Test
+	public void testDemandeModifieeAPModifieeRefuseeEleve() {
+
+		try {
+
+			AccPersonalise SDL = new AccPersonalise(itg, "Salon Du Libre", 1,
+					lng);
+
+			DemandeValidationConsoTempsAccPers dvctap = new DemandeValidationConsoTempsAccPers();
+			dvctap.setId(lng);
+			dvctap.setAnneeScolaire("2012");
+			dvctap.setDateAction(new java.sql.Date(07 / 10 / 12));
+			dvctap.setMinutes(time);
+			dvctap.setProf(OKP);
+			dvctap.setAccPers(SDL);
+			dvctap.setEleve(NBR);
+
+			dvctap.sauvegarde(4, 0);
+			dvctap.sauvegarde(4096, 1);
+			dvctap.sauvegarde(2, 2);
+
+			System.out.println(dvctap.chargement());
+
+			assertTrue("Demande annulée par l'éleve",
+					dvctap.cheminsPossible(dvctap.chargement()));
 		} catch (DVCTAPException e) {
 
 		}

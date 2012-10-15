@@ -186,12 +186,75 @@ public class DemandeValidationConsoTempsAccPers {
 	 *            </ul>
 	 */
 
-	// /** Insère la valeur dans une liste de int */
+	// /** Insère la valeur dans une liste de Integer */
 
 	public void sauvegarde(int etat, int index) {
 
 		this.liste.add(index, etat);
 
+	}
+
+	public boolean isEtatInitial() {
+
+		return this.etat == DEMANDE_INIT;
+
+	}
+
+	/**
+	 * Test des diférents chemins
+	 */
+
+	public boolean cheminsPossible(ArrayList<Integer> a) {
+
+		int longueurListe = a.size();
+
+		if (longueurListe == 1) {
+			if (a.get(0) == ELEVE_ANNULEE 
+					|| a.get(0) == PROF_VALIDEE
+					|| a.get(0) == PROF_REFUSEE) {
+
+				return true;
+			}
+		}
+
+		else if (longueurListe == 2) {
+			if (a.get(0) == ELEVE_MODIFIEE 
+					|| a.get(0) == DATE_MODIFIEE 
+					|| a.get(0) == DUREE_MODIFIEE
+					|| a.get(0) == AP_MODIFIEE) {
+
+				if (a.get(1) == ELEVE_ACCEPTEE 
+						|| a.get(1) == ELEVE_REFUSE
+						|| a.get(1) == ELEVE_ANNULEE) {
+
+					return true;
+				}
+			}
+		}
+
+		else if (longueurListe == 3) {
+
+			if (a.get(0) == ELEVE_MODIFIEE) {
+
+				if (a.get(1) == DATE_MODIFIEE 
+						|| a.get(1) == DUREE_MODIFIEE
+						|| a.get(1) == AP_MODIFIEE) {
+
+					if (a.get(2) == ELEVE_ACCEPTEE 
+							|| a.get(2) == ELEVE_REFUSE) {
+
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	public ArrayList<Integer> chargement() {
+
+		return liste;
 	}
 
 	@Override
@@ -200,43 +263,5 @@ public class DemandeValidationConsoTempsAccPers {
 				+ anneeScolaire + ", dateAction=" + dateAction + ", minutes="
 				+ minutes + ", prof=" + prof + ", accPers=" + accPers
 				+ ", eleve=" + eleve + ", etat=" + etat + "]";
-	}
-
-	public boolean isEtatInitial() {
-
-		return this.etat == 0;
-
-	}
-	
-	/**
-	 *  Test des diférents chemins
-	 */
-
-	public boolean cheminsPossible(ArrayList<Integer> a) {
-
-		if (a.get(0) == ELEVE_MODIFIEE 
-				|| a.get(0) == ELEVE_ANNULEE
-				|| a.get(0) == PROF_VALIDEE 
-				|| a.get(0) == PROF_REFUSEE) {
-
-			if (a.get(1) == null 
-					|| a.get(1) == ELEVE_ACCEPTEE 
-					|| a.get(1) == ELEVE_REFUSE
-					|| a.get(1) == ELEVE_ANNULEE 
-					|| a.get(1) == PROF_VALIDEE 
-					|| a.get(1) == PROF_REFUSEE
-					|| a.get(1) == DATE_MODIFIEE 
-					|| a.get(1) == DUREE_MODIFIEE 
-					|| a.get(1) == AP_MODIFIEE) {
-
-				if (a.get(2) == null  || a.get(2) == ELEVE_ACCEPTEE || a.get(2) == ELEVE_REFUSE) {
-
-					return true;
-				}
-			}
-		}
-		
-		return false;
-		
 	}
 }
